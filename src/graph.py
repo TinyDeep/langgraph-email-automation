@@ -34,15 +34,15 @@ class Workflow():
         )
 
         # route email based on category
-        # workflow.add_conditional_edges(
-        #     "categorize_email",
-        #     nodes.route_email_based_on_category,
-        #     {
-        #         "product related": "construct_rag_queries",
-        #         "not product related": "email_writer", # Feedback or Complaint
-        #         "unrelated": "skip_unrelated_email"
-        #     }
-        # )
+        workflow.add_conditional_edges(
+            "categorize_email",
+            nodes.route_email_based_on_category,
+            {
+                "product related": "construct_rag_queries",
+                "not product related": "email_writer", # Feedback or Complaint
+                "unrelated": "skip_unrelated_email"
+            }
+        )
 
         # pass constructed queries to RAG chain to retrieve information
         workflow.add_edge("construct_rag_queries", "retrieve_from_rag")
